@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loteria Dinamica 2026</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">Loteria Mexicana</p>
+                <h1>Generador dinamico de tablas</h1>
+                <p class="intro">
+                    Crea tus cartas para imprimir usando las imagenes y nombres definidos en <code>cards.js</code>.
+                </p>
+            </div>
+        </section>
+
+        <section class="panel controls">
+            <h2>Configurar tablas</h2>
+            <form id="generator-form" class="controls-grid">
+                <label>
+                    <span>Numero de tablas</span>
+                    <input id="table-count" type="number" min="1" max="200" value="4" required>
+                </label>
+                <label>
+                    <span>Filas</span>
+                    <input id="row-count" type="number" min="2" max="8" value="4" required>
+                </label>
+                <label>
+                    <span>Columnas</span>
+                    <input id="col-count" type="number" min="2" max="8" value="4" required>
+                </label>
+                <div class="actions">
+                    <button type="submit" class="primary">Generar tablas</button>
+                    <button type="button" id="open-pdf-config" class="secondary" disabled>Generar PDF</button>
+                </div>
+            </form>
+            <p id="status-message" class="status">Sugerencia inicial: tablas 4x4.</p>
+        </section>
+
+        <section class="panel">
+            <div class="section-head">
+                <h2>Vista previa</h2>
+                <p id="preview-summary">Aun no hay tablas generadas.</p>
+            </div>
+            <div id="tables-container" class="tables-container"></div>
+        </section>
+    </main>
+
+    <dialog id="pdf-dialog">
+        <form method="dialog" class="dialog-card" id="pdf-form">
+            <h3>Tamano para PDF</h3>
+            <p>Selecciona como quieres acomodar las tablas dentro de hoja carta.</p>
+            <label class="choice">
+                <input type="radio" name="pdf-size" value="full" checked>
+                <span>Carta completa</span>
+            </label>
+            <label class="choice">
+                <input type="radio" name="pdf-size" value="half">
+                <span>Media carta</span>
+            </label>
+            <label class="choice">
+                <input type="radio" name="pdf-size" value="quarter">
+                <span>Cuarto de carta</span>
+            </label>
+            <div class="actions">
+                <button type="button" id="cancel-pdf" class="secondary">Cancelar</button>
+                <button type="submit" class="primary">Descargar PDF</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="./js/cards.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
