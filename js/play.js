@@ -33,6 +33,7 @@
     const els = {
         goToPlay: document.getElementById("go-to-play"),
         goToPlayBoth: document.getElementById("go-to-play-both"),
+        playView: document.getElementById("play-view"),
         playModeMenu: document.getElementById("play-mode-menu"),
         playTableMode: document.getElementById("play-table-mode"),
         playSingMode: document.getElementById("play-sing-mode"),
@@ -151,6 +152,10 @@
         els.playSingMode.hidden = mode !== "sing";
         els.playBothMode.hidden = mode !== "both";
 
+        if (els.playView) {
+            els.playView.classList.remove("board-active", "combo-active");
+        }
+
         if (mode === "table") {
             renderTableMode();
         }
@@ -195,6 +200,14 @@
         els.tableSelectionView.hidden = hasTable;
         els.tableBoardView.hidden = !hasTable;
 
+        if (els.playView) {
+            if (hasTable) {
+                els.playView.classList.add("board-active");
+            } else {
+                els.playView.classList.remove("board-active");
+            }
+        }
+
         if (!hasTable) {
             return;
         }
@@ -208,6 +221,14 @@
         const hasTable = state.comboTableIndex !== null;
         els.comboSelectionView.hidden = hasTable;
         els.comboBoardView.hidden = !hasTable;
+
+        if (els.playView) {
+            if (hasTable) {
+                els.playView.classList.add("combo-active");
+            } else {
+                els.playView.classList.remove("combo-active");
+            }
+        }
 
         if (!hasTable) {
             return;
