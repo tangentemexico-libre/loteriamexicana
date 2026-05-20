@@ -32,6 +32,7 @@
 
     const els = {
         goToPlay: document.getElementById("go-to-play"),
+        goToPlayBoth: document.getElementById("go-to-play-both"),
         playModeMenu: document.getElementById("play-mode-menu"),
         playTableMode: document.getElementById("play-table-mode"),
         playSingMode: document.getElementById("play-sing-mode"),
@@ -78,19 +79,40 @@
         comboIndex: -1
     };
 
-    els.goToPlay.addEventListener("click", () => setMode(null));
-    els.playModeTable.addEventListener("click", () => setMode("table"));
-    els.playModeSing.addEventListener("click", () => {
-        setMode("sing");
-        resetSinger("sing");
-    });
-    els.playModeBoth.addEventListener("click", () => {
+    els.goToPlay.addEventListener("click", () => setMode("table"));
+    els.goToPlayBoth.addEventListener("click", () => {
         setMode("both");
         resetSinger("combo");
     });
-    els.backTable.addEventListener("click", () => setMode(null));
-    els.backSing.addEventListener("click", () => setMode(null));
-    els.backBoth.addEventListener("click", () => setMode(null));
+    if (els.playModeTable) {
+        els.playModeTable.addEventListener("click", () => setMode("table"));
+    }
+
+    if (els.playModeSing) {
+        els.playModeSing.addEventListener("click", () => {
+            setMode("sing");
+            resetSinger("sing");
+        });
+    }
+
+    if (els.playModeBoth) {
+        els.playModeBoth.addEventListener("click", () => {
+            setMode("both");
+            resetSinger("combo");
+        });
+    }
+
+    if (els.backTable) {
+        els.backTable.addEventListener("click", () => setMode("table"));
+    }
+
+    if (els.backSing) {
+        els.backSing.addEventListener("click", () => setMode("table"));
+    }
+
+    if (els.backBoth) {
+        els.backBoth.addEventListener("click", () => setMode("both"));
+    }
     els.changeSelectedTable.addEventListener("click", () => {
         state.tableIndex = null;
         state.tableMarks = new Set();
@@ -118,13 +140,13 @@
         renderBothMode();
     });
 
-    setMode(null);
+    setMode("table");
     renderSinger("sing");
     renderSinger("combo");
 
     function setMode(mode) {
         state.mode = mode;
-        els.playModeMenu.hidden = mode !== null;
+        els.playModeMenu.hidden = true;
         els.playTableMode.hidden = mode !== "table";
         els.playSingMode.hidden = mode !== "sing";
         els.playBothMode.hidden = mode !== "both";
@@ -209,19 +231,19 @@
             button.dataset.marked = marks.has(card.id) ? "true" : "false";
             button.addEventListener("click", () => toggleMark(card.id, scope));
 
+            const imageFrame = document.createElement("div");
+            imageFrame.className = "play-card-image-frame";
+
             const img = document.createElement("img");
             img.src = card.image;
             img.alt = card.name;
-
-            const title = document.createElement("span");
-            title.className = "play-card-title";
-            title.textContent = `${card.id}. ${sanitizeName(card.name)}`;
+            imageFrame.appendChild(img);
 
             const status = document.createElement("span");
             status.className = "play-card-mark";
             status.textContent = marks.has(card.id) ? "Palomeada" : "Toca para marcar";
 
-            button.append(img, title, status);
+            button.append(imageFrame, status);
             grid.appendChild(button);
         });
 

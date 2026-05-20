@@ -23,7 +23,7 @@
                     <span class="menu-option-number">1.</span>
                     <span class="menu-option-copy">
                         <strong>Jugar</strong>
-                        <small>Preparamos esta opcion en el siguiente paso.</small>
+                        <small>Elige una tabla predefinida y marca tu avance manualmente.</small>
                     </span>
                 </button>
                 <button type="button" id="go-to-generator" class="menu-option secondary">
@@ -31,6 +31,13 @@
                     <span class="menu-option-copy">
                         <strong>Generar tablas para imprimir</strong>
                         <small>Usa el generador y exporta tus tablas a PDF.</small>
+                    </span>
+                </button>
+                <button type="button" id="go-to-play-both" class="menu-option secondary">
+                    <span class="menu-option-number">3.</span>
+                    <span class="menu-option-copy">
+                        <strong>Jugar y Cantar</strong>
+                        <small>Combina tu tablero con el canto aleatorio en la misma pantalla.</small>
                     </span>
                 </button>
             </div>
@@ -42,10 +49,13 @@
                     <p class="eyebrow">Opcion 1</p>
                     <h2>Jugar</h2>
                 </div>
-                <button type="button" id="back-from-play" class="secondary">Volver al menu</button>
+                <div class="section-actions">
+                    <button type="button" id="go-to-generator-from-play" class="secondary">Ir a opcion 2</button>
+                    <button type="button" id="back-from-play" class="secondary">Volver al menu</button>
+                </div>
             </div>
 
-            <section id="play-mode-menu" class="play-block">
+            <section id="play-mode-menu" class="play-block" hidden>
                 <p class="status">Elige como quieres jugar.</p>
                 <div class="menu-grid play-mode-grid">
                     <button type="button" id="play-mode-table" class="menu-option primary">
@@ -75,10 +85,10 @@
             <section id="play-table-mode" class="play-block" hidden>
                 <div class="section-head">
                     <div>
-                        <p class="eyebrow">Modo 1</p>
+                        <p class="eyebrow">Tablas</p>
                         <h3>Elegir tabla</h3>
                     </div>
-                    <button type="button" id="back-to-play-modes-from-table" class="secondary">Cambiar modo</button>
+                    <button type="button" id="back-to-play-modes-from-table" class="secondary" hidden>Cambiar modo</button>
                 </div>
                 <div id="table-selection-view" class="play-subview">
                     <p class="status">Selecciona una tabla predefinida para verla en grande.</p>
@@ -125,10 +135,10 @@
             <section id="play-both-mode" class="play-block" hidden>
                 <div class="section-head">
                     <div>
-                        <p class="eyebrow">Modo 3</p>
+                        <p class="eyebrow">Canto y tablero</p>
                         <h3>Jugar y cantar</h3>
                     </div>
-                    <button type="button" id="back-to-play-modes-from-both" class="secondary">Cambiar modo</button>
+                    <button type="button" id="back-to-play-modes-from-both" class="secondary" hidden>Cambiar modo</button>
                 </div>
                 <div id="combo-selection-view" class="play-subview">
                     <p class="status">Primero elige una tabla predefinida para jugar mientras cantas.</p>
@@ -166,7 +176,10 @@
                         <p class="eyebrow">Opcion 2</p>
                         <h2>Generar tablas para imprimir</h2>
                     </div>
-                    <button type="button" id="back-from-generator" class="secondary">Volver al menu</button>
+                    <div class="section-actions">
+                        <button type="button" id="go-to-play-from-generator" class="secondary">Ir a opcion 1</button>
+                        <button type="button" id="back-from-generator" class="secondary">Volver al menu</button>
+                    </div>
                 </div>
                 <form id="generator-form" class="controls-grid">
                     <label>
