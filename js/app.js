@@ -8,8 +8,6 @@
     const goToPlayButton = document.getElementById("go-to-play");
     const goToGeneratorButton = document.getElementById("go-to-generator");
     const goToPlayBothButton = document.getElementById("go-to-play-both");
-    const goToGeneratorFromPlayButton = document.getElementById("go-to-generator-from-play");
-    const goToPlayFromGeneratorButton = document.getElementById("go-to-play-from-generator");
     const backFromPlayButton = document.getElementById("back-from-play");
     const backFromGeneratorButton = document.getElementById("back-from-generator");
     const form = document.getElementById("generator-form");
@@ -39,14 +37,6 @@
     });
 
     goToPlayBothButton.addEventListener("click", () => {
-        setActiveView("play");
-    });
-
-    goToGeneratorFromPlayButton.addEventListener("click", () => {
-        setActiveView("generator");
-    });
-
-    goToPlayFromGeneratorButton.addEventListener("click", () => {
         setActiveView("play");
     });
 
