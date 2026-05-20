@@ -33,8 +33,15 @@
                         <small>Usa el generador y exporta tus tablas a PDF.</small>
                     </span>
                 </button>
-                <button type="button" id="go-to-play-both" class="menu-option secondary">
+                <button type="button" id="go-to-sing" class="menu-option secondary">
                     <span class="menu-option-number">3.</span>
+                    <span class="menu-option-copy">
+                        <strong>Cantar</strong>
+                        <small>Baraja las 54 cartas y avanza una por una tocando la carta actual.</small>
+                    </span>
+                </button>
+                <button type="button" id="go-to-play-both" class="menu-option secondary">
+                    <span class="menu-option-number">4.</span>
                     <span class="menu-option-copy">
                         <strong>Jugar y Cantar</strong>
                         <small>Combina tu tablero con el canto aleatorio en la misma pantalla.</small>
@@ -147,17 +154,19 @@
                     <div class="combo-layout">
                         <div class="combo-caller panel inset-panel">
                             <div class="section-head">
-                                <p id="combo-table-title" class="status">Tabla seleccionada</p>
-                                <button type="button" id="change-combo-table" class="secondary">Cambiar tabla</button>
+                                <div class="combo-title-group">
+                                    <p id="combo-table-title" class="status">Tabla seleccionada</p>
+                                    <span id="combo-called-count" class="badge">0 / 54</span>
+                                </div>
+                                <div class="combo-actions">
+                                    <button type="button" id="restart-combo-singing" class="secondary">Revolver</button>
+                                    <button type="button" id="change-combo-table" class="secondary">Cambiar tabla</button>
+                                </div>
                             </div>
                             <button type="button" id="combo-current-call-card" class="current-call-card compact">
                                 <span class="current-call-empty">Toca para iniciar el canto</span>
                             </button>
                             <p id="combo-current-call-name" class="current-call-name">Las cartas se revolveran al iniciar.</p>
-                            <div class="actions">
-                                <button type="button" id="restart-combo-singing" class="secondary">Revolver de nuevo</button>
-                                <p id="combo-called-count" class="status">0 / 54</p>
-                            </div>
                             <div id="combo-called-cards-strip" class="called-cards-strip"></div>
                         </div>
                         <div class="combo-table panel inset-panel">

@@ -61,6 +61,30 @@ input {
     font-weight: 700;
 }
 
+.badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 99px;
+    margin-left: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.combo-title-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.combo-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 h1,
 h2,
 h3,
@@ -516,31 +540,325 @@ dialog::backdrop {
 
 @media (max-width: 640px) {
     .page {
-        width: min(100% - 20px, 1180px);
-        padding-top: 20px;
+        width: min(100% - 12px, 1180px);
+        padding: 8px 0 16px !important;
     }
 
     .panel,
     .hero {
-        padding: 18px;
-        border-radius: 18px;
+        padding: 12px;
+        border-radius: 14px;
+        margin-bottom: 12px;
     }
 
+    /* Hide outer headers during active gameplay to maximize vertical space */
+    #play-view.board-active > .section-head,
+    #play-view.board-active #play-table-mode > .section-head,
+    #play-view.combo-active > .section-head,
+    #play-view.combo-active #play-both-mode > .section-head {
+        display: none !important;
+    }
+
+    /* Make play panels super tight when playing */
+    #play-view.board-active,
+    #play-view.combo-active {
+        padding: 8px !important;
+        border-radius: 14px !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Compact board view header */
+    #table-board-view > .section-head {
+        margin-bottom: 8px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        gap: 8px !important;
+    }
+
+    #table-board-view #selected-table-title {
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--accent) !important;
+    }
+
+    #table-board-view #change-selected-table {
+        padding: 6px 12px !important;
+        font-size: 0.82rem !important;
+        border-radius: 99px !important;
+        white-space: nowrap !important;
+    }
+
+    /* Keep real 4x4 Grid in mobile instead of stretching to 2 columns */
     .play-table-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 6px !important;
+    }
+
+    /* Ultra compact and elegant gameplay cards */
+    .play-card {
+        padding: 4px !important;
+        border-radius: 10px !important;
+        border-width: 1.5px !important;
+        gap: 0 !important;
+        box-shadow: 0 4px 12px rgba(77, 48, 23, 0.04) !important;
+    }
+
+    .play-card-image-frame {
+        padding: 0 !important;
+        border-radius: 6px !important;
+        background: #fff !important;
     }
 
     .play-card img {
-        max-height: 220px;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        aspect-ratio: 0.72 !important;
+        object-fit: contain !important;
+        border-radius: 6px !important;
     }
 
-    .caller-stage,
+    /* Hide the text helper on mobile - overlay checkmark is more than enough */
+    .play-card-mark {
+        display: none !important;
+    }
+
+    /* Premium interactive tactile feedback for marked cards */
+    .play-card[data-marked="true"] {
+        border-color: #2f8f4e !important;
+        background: #fff !important;
+    }
+
+    .play-card[data-marked="true"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(47, 143, 78, 0.18); /* Translucent green bean overlay */
+        border-radius: inherit;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .play-card[data-marked="true"]::after {
+        content: "✓" !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 14px !important;
+        background: #2f8f4e !important;
+        border: 2px solid #fff !important;
+        color: #fff !important;
+        border-radius: 999px !important;
+        display: grid !important;
+        place-items: center !important;
+        font-weight: 800 !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+        z-index: 2 !important;
+    }
+
+    /* Caller stage (Option 1.2: Cantar only) */
+    .caller-stage {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .caller-main {
+        padding: 12px !important;
+    }
+
+    .current-call-card {
+        min-height: 260px !important;
+        padding: 12px !important;
+        border-radius: 16px !important;
+        gap: 10px !important;
+    }
+
+    .current-call-card img {
+        width: min(100%, 140px) !important;
+    }
+
+    .caller-sidebar {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 12px !important;
+        padding: 12px !important;
+    }
+
+    .caller-stat {
+        gap: 2px !important;
+    }
+
+    .caller-stat strong {
+        font-size: 1.25rem !important;
+    }
+
+    /* Option 1.3: Combo Play and Sing Mode Responsive Grid Dashboard */
     .combo-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
     }
 
-    .current-call-card,
-    .current-call-card.compact {
-        min-height: 320px;
+    .combo-active .combo-caller {
+        background: #fffaf2 !important;
+        border: 1px solid #e6d8c3 !important;
+        border-radius: 14px !important;
+        padding: 8px !important;
+        margin-bottom: 8px !important;
+        display: grid !important;
+        grid-template-areas:
+            "header header"
+            "card name" !important;
+        grid-template-columns: auto 1fr !important;
+        align-items: center !important;
+        gap: 8px !important;
     }
+
+    .combo-active .combo-caller > .section-head {
+        grid-area: header !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin: 0 !important;
+        border-bottom: 1px dashed #e6d8c3 !important;
+        padding-bottom: 6px !important;
+        width: 100% !important;
+        gap: 8px !important;
+    }
+
+    .combo-active .combo-caller .combo-title-group {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+
+    .combo-active .combo-caller #combo-table-title {
+        font-size: 0.85rem !important;
+        margin: 0 !important;
+        font-weight: 700 !important;
+        color: var(--ink) !important;
+    }
+
+    .combo-active .combo-caller .badge {
+        font-size: 0.72rem !important;
+        padding: 2px 6px !important;
+        margin-left: 0 !important;
+    }
+
+    .combo-active .combo-caller .combo-actions {
+        display: flex !important;
+        gap: 4px !important;
+    }
+
+    .combo-active .combo-caller .combo-actions button {
+        padding: 4px 8px !important;
+        font-size: 0.72rem !important;
+        border-radius: 99px !important;
+        white-space: nowrap !important;
+        background: #efe2ce !important;
+        color: var(--ink) !important;
+    }
+
+    .combo-active .combo-caller > #combo-current-call-card {
+        grid-area: card !important;
+        width: 54px !important;
+        height: 75px !important;
+        min-height: 75px !important;
+        padding: 2px !important;
+        border-radius: 6px !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: 1.5px solid #1f1c19 !important;
+        background: radial-gradient(circle at top, rgba(213, 255, 129, 0.25), transparent 40%), #fff !important;
+    }
+
+    .combo-active .combo-caller > #combo-current-call-card img {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 4px !important;
+        border: 0 !important;
+        object-fit: cover !important;
+    }
+
+    .combo-active .combo-caller > #combo-current-call-card .current-call-empty {
+        font-size: 0.65rem !important;
+        font-weight: bold !important;
+        line-height: 1.1 !important;
+    }
+
+    .combo-active .combo-caller .current-call-hint {
+        display: none !important;
+    }
+
+    .combo-active .combo-caller > #combo-current-call-name {
+        grid-area: name !important;
+        align-self: center !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        text-align: left !important;
+        margin: 0 !important;
+        color: var(--accent) !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    /* Hide the history strip inside combo caller in mobile to save space */
+    .combo-active .combo-caller #combo-called-cards-strip {
+        display: none !important;
+    }
+
+    .combo-active .combo-table {
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .combo-active .selected-table-board,
+    .combo-active .combo-board {
+        padding-top: 0 !important;
+    }
+
+    /* Option 3: Cantar mode card scale in mobile */
+    #current-call-card:has(img) img {
+        width: min(100%, 250px) !important;
+        border-radius: 14px !important;
+    }
+}
+
+/* Strip all styles from the calling card in Sing mode when displaying an active card image */
+#current-call-card:has(img) {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    min-height: 0 !important;
+    width: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+#current-call-card:has(img) img {
+    width: min(100%, 340px) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 0.72 !important;
+    object-fit: contain !important;
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 20px 45px rgba(77, 48, 23, 0.16) !important;
+    background: none !important;
+    display: block;
+    margin: 0 auto;
 }

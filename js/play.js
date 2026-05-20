@@ -33,6 +33,8 @@
     const els = {
         goToPlay: document.getElementById("go-to-play"),
         goToPlayBoth: document.getElementById("go-to-play-both"),
+        goToSing: document.getElementById("go-to-sing"),
+        playView: document.getElementById("play-view"),
         playModeMenu: document.getElementById("play-mode-menu"),
         playTableMode: document.getElementById("play-table-mode"),
         playSingMode: document.getElementById("play-sing-mode"),
@@ -84,6 +86,12 @@
         setMode("both");
         resetSinger("combo");
     });
+    if (els.goToSing) {
+        els.goToSing.addEventListener("click", () => {
+            setMode("sing");
+            resetSinger("sing");
+        });
+    }
     if (els.playModeTable) {
         els.playModeTable.addEventListener("click", () => setMode("table"));
     }
@@ -151,6 +159,25 @@
         els.playSingMode.hidden = mode !== "sing";
         els.playBothMode.hidden = mode !== "both";
 
+        if (els.playView) {
+            els.playView.classList.remove("board-active", "combo-active");
+            
+            const playTitleEl = els.playView.querySelector(".section-head h2");
+            const playEyebrowEl = els.playView.querySelector(".section-head .eyebrow");
+            if (playTitleEl && playEyebrowEl) {
+                if (mode === "table") {
+                    playEyebrowEl.textContent = "Opcion 1";
+                    playTitleEl.textContent = "Jugar";
+                } else if (mode === "sing") {
+                    playEyebrowEl.textContent = "Opcion 3";
+                    playTitleEl.textContent = "Cantar";
+                } else if (mode === "both") {
+                    playEyebrowEl.textContent = "Opcion 4";
+                    playTitleEl.textContent = "Jugar y cantar";
+                }
+            }
+        }
+
         if (mode === "table") {
             renderTableMode();
         }
@@ -195,6 +222,14 @@
         els.tableSelectionView.hidden = hasTable;
         els.tableBoardView.hidden = !hasTable;
 
+        if (els.playView) {
+            if (hasTable) {
+                els.playView.classList.add("board-active");
+            } else {
+                els.playView.classList.remove("board-active");
+            }
+        }
+
         if (!hasTable) {
             return;
         }
@@ -208,6 +243,14 @@
         const hasTable = state.comboTableIndex !== null;
         els.comboSelectionView.hidden = hasTable;
         els.comboBoardView.hidden = !hasTable;
+
+        if (els.playView) {
+            if (hasTable) {
+                els.playView.classList.add("combo-active");
+            } else {
+                els.playView.classList.remove("combo-active");
+            }
+        }
 
         if (!hasTable) {
             return;
@@ -316,13 +359,23 @@
 
         if (!current) {
             cardEl.innerHTML = `<span class="current-call-empty">Toca para iniciar el canto</span>`;
+            nameEl.style.display = "block";
             nameEl.textContent = "Las cartas se revolveran al iniciar.";
         } else {
-            cardEl.innerHTML = `
-                <img src="${current.image}" alt="${escapeHtml(sanitizeName(current.name))}">
-                <span class="current-call-hint">Toca para cantar la siguiente</span>
-            `;
-            nameEl.textContent = `${current.id}. ${sanitizeName(current.name)}`;
+            if (isCombo) {
+                cardEl.innerHTML = `
+                    <img src="${current.image}" alt="${escapeHtml(sanitizeName(current.name))}">
+                    <span class="current-call-hint">Toca para cantar la siguiente</span>
+                `;
+                nameEl.style.display = "block";
+                nameEl.textContent = `${current.id}. ${sanitizeName(current.name)}`;
+            } else {
+                cardEl.innerHTML = `
+                    <img src="${current.image}" alt="${escapeHtml(sanitizeName(current.name))}">
+                `;
+                nameEl.style.display = "none";
+                nameEl.textContent = "";
+            }
         }
 
         history.forEach((card) => {
