@@ -364,14 +364,14 @@
         } else {
             if (isCombo) {
                 cardEl.innerHTML = `
-                    <img src="${current.image}" alt="${escapeHtml(sanitizeName(current.name))}">
+                    <img src="${current.image}" alt="${escapeHtml(current.name)}">
                     <span class="current-call-hint">Toca para cantar la siguiente</span>
                 `;
                 nameEl.style.display = "block";
-                nameEl.textContent = `${current.id}. ${sanitizeName(current.name)}`;
+                nameEl.textContent = `${current.id}. ${current.name}`;
             } else {
                 cardEl.innerHTML = `
-                    <img src="${current.image}" alt="${escapeHtml(sanitizeName(current.name))}">
+                    <img src="${current.image}" alt="${escapeHtml(current.name)}">
                 `;
                 nameEl.style.display = "none";
                 nameEl.textContent = "";
@@ -398,10 +398,6 @@
         }
 
         return list;
-    }
-
-    function sanitizeName(value) {
-        return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
 
     function escapeHtml(value) {
