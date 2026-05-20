@@ -2,6 +2,13 @@
     const jsPDF = window.jspdf && window.jspdf.jsPDF;
     const cards = window.cardsManager.getAllCards();
 
+    const menuView = document.getElementById("menu-view");
+    const playView = document.getElementById("play-view");
+    const generatorView = document.getElementById("generator-view");
+    const goToPlayButton = document.getElementById("go-to-play");
+    const goToGeneratorButton = document.getElementById("go-to-generator");
+    const backFromPlayButton = document.getElementById("back-from-play");
+    const backFromGeneratorButton = document.getElementById("back-from-generator");
     const form = document.getElementById("generator-form");
     const tableCountInput = document.getElementById("table-count");
     const rowCountInput = document.getElementById("row-count");
@@ -19,6 +26,22 @@
         rows: 4,
         cols: 4
     };
+
+    goToPlayButton.addEventListener("click", () => {
+        setActiveView("play");
+    });
+
+    goToGeneratorButton.addEventListener("click", () => {
+        setActiveView("generator");
+    });
+
+    backFromPlayButton.addEventListener("click", () => {
+        setActiveView("menu");
+    });
+
+    backFromGeneratorButton.addEventListener("click", () => {
+        setActiveView("menu");
+    });
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -79,6 +102,12 @@
             openPdfButton.disabled = false;
         }
     });
+
+    function setActiveView(view) {
+        menuView.hidden = view !== "menu";
+        playView.hidden = view !== "play";
+        generatorView.hidden = view !== "generator";
+    }
 
     function normalizeNumber(value, min, max, fallback) {
         const parsed = Number.parseInt(value, 10);
