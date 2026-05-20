@@ -797,4 +797,36 @@ dialog::backdrop {
     .combo-active .combo-board {
         padding-top: 0 !important;
     }
+
+    /* Option 3: Cantar mode card scale in mobile */
+    #current-call-card:has(img) img {
+        width: min(100%, 250px) !important;
+        border-radius: 14px !important;
+    }
+}
+
+/* Strip all styles from the calling card in Sing mode when displaying an active card image */
+#current-call-card:has(img) {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    min-height: 0 !important;
+    width: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+#current-call-card:has(img) img {
+    width: min(100%, 340px) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 0.72 !important;
+    object-fit: contain !important;
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 20px 45px rgba(77, 48, 23, 0.16) !important;
+    background: none !important;
+    display: block;
+    margin: 0 auto;
 }

@@ -7,6 +7,7 @@
     const generatorView = document.getElementById("generator-view");
     const goToPlayButton = document.getElementById("go-to-play");
     const goToGeneratorButton = document.getElementById("go-to-generator");
+    const goToSingButton = document.getElementById("go-to-sing");
     const goToPlayBothButton = document.getElementById("go-to-play-both");
     const backFromPlayButton = document.getElementById("back-from-play");
     const backFromGeneratorButton = document.getElementById("back-from-generator");
@@ -34,6 +35,10 @@
 
     goToGeneratorButton.addEventListener("click", () => {
         setActiveView("generator");
+    });
+
+    goToSingButton.addEventListener("click", () => {
+        setActiveView("play");
     });
 
     goToPlayBothButton.addEventListener("click", () => {
