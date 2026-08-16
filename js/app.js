@@ -188,7 +188,7 @@
             drawTableOnPdf(pdf, state.tables[index], index + 1, layout.slots[slotIndex], imageCache);
         }
 
-        pdf.save(`tablas-loteria-${state.rows}x${state.cols}.pdf`);
+        pdf.save(`loteria-del-bebe-${state.rows}x${state.cols}.pdf`);
     }
 
     function exportPrintView(size) {
@@ -207,7 +207,7 @@
 <head>
     <meta charset="UTF-8">
     <base href="${window.location.href}">
-    <title>Tablas de loteria</title>
+    <title>Tablas de la Lotería del Bebé</title>
     <style>
         @page { size: letter ${layout.orientationCss}; margin: ${asMm(layout.pageMargin)}; }
         * { box-sizing: border-box; }

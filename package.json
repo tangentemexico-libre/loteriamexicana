@@ -2,7 +2,7 @@
     "name": "loteria-dinamica-2026",
     "version": "1.0.0",
     "private": true,
-    "description": "Generador de tablas de loteria mexicana con exportacion a PDF",
+    "description": "Lotería ilustrada para baby shower con 20 tarjetas y exportación a PDF",
     "scripts": {
         "start": "npx http-server . -p 3010",
         "dev": "npx http-server . -p 3010"

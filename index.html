@@ -4,22 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loteria Dinamica 2026</title>
+    <title>Lotería del Bebé</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
     <main class="page">
         <section class="hero">
-            <div>
-                <p class="eyebrow">Loteria Mexicana</p>
-
-                <p class="intro">Selecciona lo que quieres hacer en la aplicación.</p>
+            <div class="hero-copy">
+                <p class="eyebrow">Un juego para celebrar</p>
+                <h1>Lotería del Bebé</h1>
+                <p class="intro">Veinte tarjetas ilustradas para cantar, jugar y compartir en el baby shower.</p>
+            </div>
+            <div class="hero-motif" aria-hidden="true">
+                <span class="hero-moon">☾</span>
+                <span class="hero-star star-one">✦</span>
+                <span class="hero-star star-two">✧</span>
+                <span class="hero-cloud"></span>
             </div>
         </section>
 
         <section id="menu-view" class="panel menu-panel">
-            <h2>Menu principal</h2>
+            <h2>¿Qué quieres preparar?</h2>
             <div class="menu-grid">
                 <button type="button" id="go-to-play" class="menu-option primary">
                     <span class="menu-option-number">1.</span>
@@ -39,7 +45,7 @@
                     <span class="menu-option-number">3.</span>
                     <span class="menu-option-copy">
                         <strong>Cantar</strong>
-                        <small>Baraja las 54 cartas y avanza una por una tocando la carta actual.</small>
+                        <small>Baraja las 20 cartas y avanza una por una tocando la carta actual.</small>
                     </span>
                 </button>
                 <button type="button" id="go-to-play-both" class="menu-option secondary">
@@ -77,7 +83,7 @@
                         <span class="menu-option-number">2.</span>
                         <span class="menu-option-copy">
                             <strong>Cantar</strong>
-                            <small>Baraja las 54 cartas y avanza una por una tocando la carta actual.</small>
+                            <small>Baraja las 20 cartas y avanza una por una tocando la carta actual.</small>
                         </span>
                     </button>
                     <button type="button" id="play-mode-both" class="menu-option secondary">
@@ -130,7 +136,7 @@
                     <aside class="caller-sidebar">
                         <div class="caller-stat">
                             <span>Jugadas</span>
-                            <strong id="called-count">0 / 54</strong>
+                            <strong id="called-count">0 / 20</strong>
                         </div>
                         <button type="button" id="restart-singing" class="secondary">Revolver de nuevo</button>
                     </aside>
@@ -160,7 +166,7 @@
                             <div class="section-head">
                                 <div class="combo-title-group">
                                     <p id="combo-table-title" class="status">Tabla seleccionada</p>
-                                    <span id="combo-called-count" class="badge">0 / 54</span>
+                                    <span id="combo-called-count" class="badge">0 / 20</span>
                                 </div>
                                 <div class="combo-actions">
                                     <button type="button" id="restart-combo-singing" class="secondary">Revolver</button>
@@ -196,7 +202,7 @@
                 </div>
                 <form id="generator-form" class="controls-grid">
                     <label>
-                        <span>Numero de tablas</span>
+                        <span>Número de tablas</span>
                         <input id="table-count" type="number" min="1" max="200" value="4" required>
                     </label>
                     <label>
@@ -218,7 +224,7 @@
             <section class="panel">
                 <div class="section-head">
                     <h2>Vista previa</h2>
-                    <p id="preview-summary">Aun no hay tablas generadas.</p>
+                    <p id="preview-summary">Aún no hay tablas generadas.</p>
                 </div>
                 <div id="tables-container" class="tables-container"></div>
             </section>
@@ -227,7 +233,7 @@
 
     <dialog id="pdf-dialog">
         <form method="dialog" class="dialog-card" id="pdf-form">
-            <h3>Tamano para PDF</h3>
+            <h3>Tamaño para PDF</h3>
             <p>Selecciona como quieres acomodar las tablas dentro de hoja carta.</p>
             <label class="choice">
                 <input type="radio" name="pdf-size" value="full" checked>
